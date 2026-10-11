@@ -1,0 +1,401 @@
+/* =========================================================
+   DASHBOARD ADMIN (Light)
+   Tema: Ungu–Biru, latar putih, clean & responsif
+   ========================================================= */
+:root{
+  --page-bg:#f5f7fb;
+  --surface:#ffffff;
+  --surface-2:#f9fbff;
+  --line:#e6e9f3;
+  --ink:#0f172a;
+  --ink-dim:#334155;
+  --muted:#64748b;
+  --primary:#635bff;
+  --primary-2:#3b82f6;
+  --accent:#8b5cf6;
+  --success:#16a34a;
+  --warning:#f59e0b;
+  --danger:#ef4444;
+  --shadow:0 10px 28px rgba(2,6,23,.08);
+  --shadow-soft:0 8px 20px rgba(2,6,23,.06);
+  --radius-lg:16px;
+  --radius-md:12px;
+  --brand-grad:linear-gradient(135deg, var(--primary), var(--primary-2));
+  /* Sidebar */
+  --sidebar-width: 250px;       /* Lebar default sidebar */
+  --sidebar-width-mobile: 280px; /* Lebar sidebar di mobile */
+}
+/* New Visualization Styles */
+.dashboard-section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: #f8f9fa;
+  border-radius: 12px;
+}
+.section-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: #2c3e50;
+}
+.visualization-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+.visualization-grid-small {
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+.visualization-card {
+  background: white;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+.visualization-card.wide-card {
+  grid-column: span 2;
+}
+.visualization-card .card-header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.visualization-card .card-header h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0;
+}
+.chart-container {
+  position: relative;
+  height: 100%;
+  min-height: 200px;
+}
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .visualization-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .visualization-card.wide-card {
+    grid-column: span 2;
+  }
+}
+@media (max-width: 768px) {
+  .visualization-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .visualization-card.wide-card {
+    grid-column: span 1;
+  }
+  
+  .visualization-grid-small {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  font-family: 'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(900px 360px at -10% -10%, rgba(99,91,255,.12), transparent 30%),
+    radial-gradient(900px 360px at 110% 0%, rgba(59,130,246,.10), transparent 36%),
+    var(--page-bg);
+  transition: margin-left 0.3s ease;
+}
+/* Wrapper agar tidak ganggu sidebar */
+.main-content-wrapper{
+  min-height:100vh;
+  margin-left: var(--sidebar-width); /* sesuaikan dengan lebar sidebar */
+  padding:24px 28px;
+  transition: margin-left 0.3s ease;
+}
+.content-container{max-width:1240px;margin:0 auto}
+/* Header */
+.dashboard-header{
+  display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:18px;
+}
+.dashboard-title{
+  margin:0;font-size:28px;font-weight:800;letter-spacing:.3px;
+  background:var(--brand-grad);-webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.dashboard-date{
+  display:flex;align-items:center;gap:10px;color:var(--ink-dim);font-weight:600;
+}
+.icon-sm{width:18px;height:18px;display:inline-block;object-fit:contain}
+.icon-md{width:38px;height:38px}
+.icon-lg{width:56px;height:56px}
+.data-source-notice {
+  font-size: 0.75rem;
+  color: var(--dark-gray);
+  text-align: right;
+  margin-top: var(--spacing-xs);
+  font-style: italic;
+}
+
+/* Summary cards */
+.summary-grid{
+  display:grid;gap:14px;
+  grid-template-columns: repeat(5, minmax(0,1fr));
+  margin-bottom:18px;
+}
+.summary-card{
+  display:flex;align-items:center;gap:12px;
+  padding:14px;border-radius:var(--radius-lg);
+  background:var(--surface);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+}
+.summary-card .card-content h3{
+  margin:0;font-size:14px;color:var(--muted);font-weight:700;
+}
+.summary-card .card-content p{
+  margin:2px 0 0;font-size:20px;font-weight:800;color:var(--ink);
+}
+.card-primary .card-icon{background:#eef2ff;border:1px solid #e0e7ff;border-radius:12px;padding:8px}
+.card-success .card-icon{background:#ecfdf5;border:1px solid #bbf7d0;border-radius:12px;padding:8px}
+.card-warning .card-icon{background:#fffbeb;border:1px solid #fde68a;border-radius:12px;padding:8px}
+.card-info    .card-icon{background:#eff6ff;border:1px solid #bfdbfe;border-radius:12px;padding:8px}
+.card-revenue .card-icon{background:#f5f3ff;border:1px solid #ddd6fe;border-radius:12px;padding:8px}
+/* Mini chart row */
+.mini-chart-grid{
+  display:grid;gap:14px;
+  grid-template-columns: repeat(2, minmax(0,1fr));
+  margin-bottom:18px;
+}
+.mini-chart-card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.card-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:14px;border-bottom:1px solid var(--line);
+}
+.card-header h3{
+  margin:0;font-size:16px;font-weight:800;color:var(--ink);
+  display:flex;align-items:center;gap:8px;
+}
+.mini-chart-container{padding:12px}
+/* Main charts + lists */
+.dashboard-row{
+  display:grid;gap:14px;
+  grid-template-columns: 2fr 1.4fr;
+  margin-bottom:18px;
+}
+.dashboard-card{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow);
+  overflow:hidden;
+}
+.chart-container{padding:14px}
+.badge{
+  padding:6px 10px;border-radius:999px;font-size:12px;font-weight:800;
+  background:#fffbeb;border:1px solid #fde68a;color:#92400e;
+}
+/* Unpaid list */
+.unpaid-list{padding:10px 14px}
+.unpaid-item{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px;border:1px dashed #e7e9f5;border-radius:12px;background:#f9fbff;margin-bottom:10px;
+}
+.unpaid-info h4{margin:0 0 6px;font-size:14px;font-weight:800;color:var(--ink)}
+.unpaid-info span{font-size:12px;color:var(--muted);font-weight:600}
+.unpaid-amount{font-weight:800;color:#1e3a8a}
+.transactions-list{padding:10px 14px}
+.transaction-item{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:12px;border:1px solid #edf0fa;border-radius:12px;background:#fff;margin-bottom:10px;box-shadow:var(--shadow-soft);
+}
+.transaction-info h4{margin:0 0 4px;font-size:14px;font-weight:800;color:var(--ink)}
+.transaction-info span{font-size:12px;color:var(--muted);font-weight:600}
+.transaction-amount{font-weight:800;color:#065f46}
+/* Empty states */
+.empty-state{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:24px 12px;color:var(--muted);gap:8px;
+  border:1px dashed #e7e9f5;border-radius:12px;background:#f9fbff;
+}
+/* Tooltip improvements (Chart.js uses canvas, style general container) */
+canvas{max-width:100%}
+/* Responsive */
+@media (max-width: 1200px){
+  .summary-grid{grid-template-columns: repeat(3, minmax(0,1fr));}
+  .dashboard-row{grid-template-columns: 1fr;}
+}
+@media (max-width: 992px){
+  /* Adjust for mobile sidebar */
+  body {
+    margin-left: 0;
+  }
+  
+  .main-content-wrapper {
+    margin-left: 0;
+    padding: 18px;
+  }
+  
+  body.sidebar-open {
+    margin-left: var(--sidebar-width-mobile);
+  }
+  
+  body.sidebar-open .main-content-wrapper {
+    margin-left: 0;
+    padding: 18px;
+  }
+}
+@media (max-width: 768px){
+  .summary-grid{grid-template-columns: repeat(2, minmax(0,1fr));}
+  .mini-chart-grid{grid-template-columns: 1fr;}
+  .main-content-wrapper{padding:18px}
+  .dashboard-header{flex-direction:column;align-items:flex-start;gap:8px}
+  
+  .visualization-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .visualization-card.wide-card {
+    grid-column: span 1;
+  }
+  
+  .visualization-grid-small {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
+}
+@media (max-width: 576px) {
+  .summary-grid{grid-template-columns: 1fr;}
+  
+  .dashboard-header h1 {
+    font-size: 1.5rem;
+  }
+  
+  .dashboard-title {
+    font-size: 1.5rem;
+  }
+}
+/* ================= FOOTER STYLES ================= */
+.footer-container {
+    margin-left: var(--sidebar-width); /* Sesuaikan dengan lebar sidebar */
+    padding: 20px;
+    transition: margin 0.3s ease;
+}
+
+footer {
+    background-color: #f8f9fa;
+    padding: 15px 0;
+    text-align: center;
+    border-top: 1px solid #eee;
+}
+
+footer p {
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+/* ------------------------------
+   Sidebar Toggle Button
+------------------------------ */
+.sidebar-toggle {
+    position: fixed;
+    top: 80px; /* Di bawah navbar */
+    left: 15px;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1001; /* Di atas sidebar */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.sidebar-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-toggle.active {
+    left: calc(var(--sidebar-width) + 15px); /* Posisi di pojok kanan sidebar saat terbuka */
+}
+
+.hamburger {
+    width: 24px;
+    height: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.hamburger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Tombol Close (X) - Tersembunyi secara default */
+.sidebar-toggle .close-icon {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+}
+
+/* Responsive adjustments for sidebar toggle */
+@media (max-width: 992px) {
+  .sidebar-toggle {
+    display: flex;
+  }
+  
+  .sidebar-toggle.active {
+    left: calc(var(--sidebar-width-mobile) + 15px); /* Posisi di pojok kanan sidebar saat terbuka di mobile */
+  }
+  
+  /* Animasi tombol toggle saat sidebar aktif */
+  .sidebar-toggle.active .hamburger span {
+    display: none; /* Sembunyikan hamburger */
+  }
+  
+  .sidebar-toggle.active .close-icon {
+    display: block; /* Tampilkan tombol close */
+  }
+}
+
+@media (max-width: 576px) {
+  .sidebar-toggle {
+    width: 40px;
+    height: 40px;
+    top: 70px;
+    left: 10px;
+  }
+  
+  .sidebar-toggle.active {
+    left: calc(100% - 50px); /* Pojok kanan sidebar di layar sangat kecil */
+  }
+}

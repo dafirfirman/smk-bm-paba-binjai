@@ -1,0 +1,286 @@
+/* ===========================================
+   Konfigurasi Metode Transaksi – Light Theme
+   =========================================== */
+:root{
+  --page-bg:#f5f7fb;
+  --surface:#ffffff;
+  --line:#e6e9f3;
+  --ink:#0f172a;
+  --muted:#64748b;
+  --primary:#635bff;    /* ungu */
+  --blue:#3b82f6;       /* biru */
+  --success:#16a34a;
+  --danger:#ef4444;
+  --radius-lg:16px;
+  --radius-md:12px;
+  --shadow:0 10px 28px rgba(2,6,23,.08);
+  --shadow-soft:0 8px 20px rgba(2,6,23,.06);
+  --brand-grad:linear-gradient(135deg, var(--primary), var(--blue));
+  /* Sidebar */
+  --sidebar-width: 250px;       /* Lebar default sidebar */
+  --sidebar-width-mobile: 280px; /* Lebar sidebar di mobile */
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body.dashboard-body{
+  font-family:'Poppins',system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+  color:var(--ink);
+  background:
+    radial-gradient(900px 360px at -10% -10%, rgba(99,91,255,.12), transparent 30%),
+    radial-gradient(900px 360px at 110% 0%, rgba(59,130,246,.10), transparent 36%),
+    var(--page-bg);
+  transition: margin-left 0.3s ease;
+}
+/* Layout umum */
+.main-content-wrapper{
+  min-height:100vh; 
+  padding:24px 28px; 
+  margin-left: var(--sidebar-width);
+  transition: margin-left 0.3s ease;
+}
+.content-container{max-width:1240px; margin:0 auto}
+/* Header */
+.page-header{
+  display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:16px;
+}
+.page-title{
+  margin:0; font-size:28px; font-weight:800; letter-spacing:.3px;
+  background:var(--brand-grad); -webkit-background-clip:text; background-clip:text; color:transparent;
+}
+.page-meta{display:flex; align-items:center; gap:8px; color:var(--muted); font-weight:600}
+/* Alerts */
+.alert{
+  display:flex; align-items:center; gap:10px;
+  padding:12px 14px; border-radius:12px; border:1px solid var(--line);
+  background:#fff; box-shadow:var(--shadow-soft); margin-bottom:12px; font-weight:600;
+}
+.alert-success{background:#ecfdf5; border-color:#bbf7d0; color:#065f46}
+.alert-error{background:#fff1f2; border-color:#fecdd3; color:#991b1b}
+/* Grid kartu metode */
+.payment-methods{
+  display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:16px;
+}
+@media (max-width: 920px){ 
+  .payment-methods{grid-template-columns:1fr} 
+}
+/* Kartu metode */
+.method-card{
+  background:var(--surface); border:1px solid var(--line);
+  border-radius:var(--radius-lg); box-shadow:var(--shadow);
+  padding:16px;
+}
+/* Header kartu */
+.method-header{display:flex; align-items:center; gap:12px; margin-bottom:12px}
+.method-icon{
+  width:52px; height:52px; border-radius:14px;
+  display:flex; align-items:center; justify-content:center;
+  background:#eef2ff; color:#3730a3; border:1px solid #e0e7ff; flex-shrink:0;
+  font-size:22px;
+}
+.method-title{display:flex; align-items:center; gap:10px; width:100%}
+.method-title h3{margin:0; font-size:18px; font-weight:800}
+.status-badge{
+  margin-left:auto; padding:6px 10px; border-radius:999px; font-size:12px; font-weight:800;
+  border:1px solid var(--line); background:#fff; color:var(--muted);
+}
+.status-aktif{
+  background:#ecfdf5; color:#065f46; border-color:#bbf7d0;
+}
+.status-nonaktif{
+  background:#fff7ed; color:#9a3412; border-color:#fed7aa;
+}
+/* Form */
+.method-form{display:grid; gap:12px}
+.form-group{display:grid; gap:6px}
+label{font-weight:800; font-size:13px; color:#1f2937}
+.help{color:var(--muted); font-size:12px}
+/* Input */
+.input-with-icon{
+  display:flex; align-items:center; gap:8px; border:1px solid var(--line);
+  padding:10px 12px; border-radius:12px; background:#fff;
+}
+.input-with-icon i{color:#6366f1}
+.input-with-icon input{
+  all:unset; flex:1; font-size:14px; color:#0f172a;
+}
+textarea, select{
+  width:100%; padding:10px 12px; border-radius:12px; border:1px solid var(--line);
+  font:inherit; background:#fff; color:#0f172a;
+}
+textarea{resize:vertical; min-height:120px}
+/* Buttons */
+.btn{
+  display:inline-flex; align-items:center; gap:8px; border:none; cursor:pointer;
+  border-radius:12px; padding:10px 14px; font-weight:800;
+  transition:transform .06s ease, box-shadow .2s ease;
+}
+.btn:active{transform:translateY(1px)}
+.btn-primary{
+  background:var(--brand-grad); color:#fff; box-shadow:0 10px 24px rgba(99,91,255,.25);
+}
+/* Responsive */
+@media (max-width: 992px){
+  /* Adjust for mobile sidebar */
+  body.dashboard-body {
+    margin-left: 0;
+  }
+  
+  .main-content-wrapper {
+    margin-left: 0;
+    padding: 18px;
+  }
+  
+  body.dashboard-body.sidebar-open {
+    margin-left: var(--sidebar-width-mobile);
+  }
+  
+  body.dashboard-body.sidebar-open .main-content-wrapper {
+    margin-left: 0;
+    padding: 18px;
+  }
+}
+@media (max-width: 768px){
+  .page-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+  }
+  
+  .page-title {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 576px){
+  .method-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .method-title {
+    width: 100%;
+  }
+  
+  .status-badge {
+    margin-left: 0;
+    margin-top: 8px;
+  }
+  
+  .btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+/* Print: jangan ikut sidebar/navbar */
+@media print{
+  body, .main-content-wrapper{background:#fff}
+  .page-header{margin-top:0}
+  .dashboard-sidebar, .sidebar-toggle, nav, .page-meta{display:none !important}
+}
+/* ================= FOOTER STYLES ================= */
+.footer-container {
+    margin-left: var(--sidebar-width); /* Sesuaikan dengan lebar sidebar */
+    padding: 20px;
+    transition: margin 0.3s ease;
+}
+footer {
+    background-color: #f8f9fa;
+    padding: 15px 0;
+    text-align: center;
+    border-top: 1px solid #eee;
+}
+footer p {
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 14px;
+}
+
+/* ------------------------------
+   Sidebar Toggle Button
+------------------------------ */
+.sidebar-toggle {
+    position: fixed;
+    top: 80px; /* Di bawah navbar */
+    left: 15px;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1001; /* Di atas sidebar */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+.sidebar-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+.sidebar-toggle.active {
+    left: calc(var(--sidebar-width) + 15px); /* Posisi di pojok kanan sidebar saat terbuka */
+}
+.hamburger {
+    width: 24px;
+    height: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+.hamburger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+/* Tombol Close (X) - Tersembunyi secara default */
+.sidebar-toggle .close-icon {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+}
+/* Responsive adjustments for sidebar toggle */
+@media (max-width: 992px) {
+  .sidebar-toggle {
+    display: flex;
+  }
+  
+  .sidebar-toggle.active {
+    left: calc(var(--sidebar-width-mobile) + 15px); /* Posisi di pojok kanan sidebar saat terbuka di mobile */
+  }
+  
+  /* Animasi tombol toggle saat sidebar aktif */
+  .sidebar-toggle.active .hamburger span {
+    display: none; /* Sembunyikan hamburger */
+  }
+  
+  .sidebar-toggle.active .close-icon {
+    display: block; /* Tampilkan tombol close */
+  }
+}
+@media (max-width: 576px) {
+  .sidebar-toggle {
+    width: 40px;
+    height: 40px;
+    top: 70px;
+    left: 10px;
+  }
+  
+  .sidebar-toggle.active {
+    left: calc(100% - 50px); /* Pojok kanan sidebar di layar sangat kecil */
+  }
+}

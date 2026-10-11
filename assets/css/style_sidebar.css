@@ -1,0 +1,454 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f7fb;
+    transition: margin-left 0.3s ease;
+}
+
+/* Sidebar Overlay (Mobile) */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+}
+
+.sidebar-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Konsistensi ikon FA <i> & asset <img> */
+.dashboard-sidebar .menu-link .menu-icon {
+    width: 20px;
+    height: 20px;
+    display: inline-block;
+    margin-right: 12px;
+    flex: 0 0 20px;
+    line-height: 1;
+    vertical-align: -2px;
+}
+
+.dashboard-sidebar .menu-link i.menu-icon {
+    font-size: 18px; /* FA size */
+    text-align: center;
+}
+
+.dashboard-sidebar .menu-link img.menu-icon {
+    object-fit: contain; /* biar nggak gepeng */
+    filter: none; /* untuk dark mode bisa pakai brightness(0) invert(1) */
+}
+
+/* Placeholder jika icon kosong */
+.dashboard-sidebar .menu-link .menu-icon.placeholder {
+    background: rgba(255,255,255,.15);
+    border-radius: 4px;
+}
+
+/* Opsional: highlight item aktif */
+.dashboard-sidebar li.active > .menu-link {
+    background: linear-gradient(90deg, rgba(59,130,246,.15), rgba(139,92,246,.15));
+    border-radius: 10px;
+}
+
+/* Sidebar Container */
+.dashboard-sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 250px;
+    height: 100vh;
+    background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+    color: #fff;
+    z-index: 999;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+    overflow-y: auto;
+    transition: transform 0.3s ease, width 0.3s ease;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+}
+
+/* Sidebar Top Section */
+.sidebar-top {
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-actions {
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.icon-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: none;
+    color: #fff;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.icon-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.05);
+}
+
+/* User Info Section */
+.sidebar-user {
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    font-size: 1.2rem;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.user-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.user-name {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1rem;
+    margin-bottom: 3px;
+}
+
+.user-role {
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* Menu Section */
+.sidebar-menu {
+    list-style: none;
+    padding: 20px 0;
+    flex-grow: 1;
+}
+
+.menu-section {
+    padding: 15px 20px 10px;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.7;
+    font-weight: 500;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    margin-top: 10px;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+.menu-section:first-child {
+    border-top: none;
+    margin-top: 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 5px;
+    padding: 0 15px;
+}
+
+.menu-link {
+    display: flex;
+    align-items: center;
+    padding: 12px 15px;
+    color: #fff;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.menu-link::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.menu-link:hover::before {
+    left: 100%;
+}
+
+.menu-link:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: translateX(5px);
+}
+
+.menu-link i {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 15px;
+    transition: all 0.3s ease;
+}
+
+.menu-link:hover i {
+    transform: scale(1.1);
+    color: #fff;
+}
+
+.menu-text {
+    font-size: 0.95rem;
+    font-weight: 500;
+    transition: opacity 0.3s ease;
+}
+
+/* Active Menu Item */
+.sidebar-menu li.active .menu-link {
+    background: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-menu li.active .menu-link::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 3px;
+    height: 60%;
+    background: #fff;
+    border-radius: 3px 0 0 3px;
+}
+
+/* Sidebar Footer */
+.sidebar-footer {
+    padding: 15px 20px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.sidebar-footer small {
+    font-size: 0.75rem;
+    opacity: 0.7;
+}
+
+/* Sidebar Toggle Button (Hamburger) */
+.sidebar-toggle {
+    position: fixed;
+    top: 80px; /* Di bawah navbar */
+    left: 15px;
+    width: 45px;
+    height: 45px;
+    background: linear-gradient(135deg, #4e54c8 0%, #8f94fb 100%);
+    border: none;
+    border-radius: 50%;
+    color: #fff;
+    cursor: pointer;
+    z-index: 1001; /* Di atas sidebar */
+    display: none;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.sidebar-toggle:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.sidebar-toggle.active {
+    left: 265px; /* Pindah ke pojok kanan sidebar saat terbuka */
+}
+
+.hamburger {
+    width: 24px;
+    height: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+}
+
+.hamburger span {
+    display: block;
+    height: 2px;
+    width: 100%;
+    background: #fff;
+    border-radius: 2px;
+    transition: all 0.3s ease;
+}
+
+/* Tombol Close (X) - Tersembunyi secara default */
+.sidebar-toggle .close-icon {
+    display: none;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 20px;
+    width: 24px;
+    height: 24px;
+    line-height: 24px;
+    text-align: center;
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.dashboard-sidebar {
+    animation: fadeIn 0.5s ease;
+}
+
+/* Responsive Design - PERBAIKAN PENTING */
+@media (max-width: 992px) {
+    .dashboard-sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+    }
+
+    .dashboard-sidebar.active {
+        transform: translateX(0);
+        box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
+    }
+
+    .sidebar-toggle {
+        display: flex;
+    }
+
+    body.sidebar-open {
+        overflow: hidden; /* Mencegah scroll saat sidebar terbuka */
+    }
+    
+    /* Perbaikan untuk overlay di mobile */
+    .sidebar-overlay.active {
+        display: block;
+    }
+    
+    /* Animasi tombol toggle saat sidebar aktif */
+    .sidebar-toggle.active .hamburger span {
+        display: none; /* Sembunyikan hamburger */
+    }
+    
+    .sidebar-toggle.active .close-icon {
+        display: block; /* Tampilkan tombol close */
+    }
+}
+
+@media (max-width: 576px) {
+    .dashboard-sidebar {
+        width: 100%;
+        max-width: 300px;
+    }
+
+    .sidebar-toggle {
+        width: 40px;
+        height: 40px;
+        top: 70px;
+        left: 10px;
+    }
+    
+    .sidebar-toggle.active {
+        left: calc(100% - 50px); /* Pojok kanan sidebar */
+    }
+    
+    .sidebar-user {
+        padding: 15px;
+    }
+    
+    .sidebar-menu {
+        padding: 15px 0;
+    }
+}
+
+/* Animation for menu items */
+.sidebar-menu li {
+    opacity: 0;
+    transform: translateX(-20px);
+    animation: slideIn 0.4s ease forwards;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+/* Add delay for each menu item */
+.sidebar-menu li:nth-child(1) { animation-delay: 0.1s; }
+.sidebar-menu li:nth-child(2) { animation-delay: 0.15s; }
+.sidebar-menu li:nth-child(3) { animation-delay: 0.2s; }
+.sidebar-menu li:nth-child(4) { animation-delay: 0.25s; }
+.sidebar-menu li:nth-child(5) { animation-delay: 0.3s; }
+.sidebar-menu li:nth-child(6) { animation-delay: 0.35s; }
+.sidebar-menu li:nth-child(7) { animation-delay: 0.4s; }
+.sidebar-menu li:nth-child(8) { animation-delay: 0.45s; }
+.sidebar-menu li:nth-child(9) { animation-delay: 0.5s; }
+.sidebar-menu li:nth-child(10) { animation-delay: 0.55s; }
+.sidebar-menu li:nth-child(11) { animation-delay: 0.6s; }
+.sidebar-menu li:nth-child(12) { animation-delay: 0.65s; }
+
+/* Focus styles for accessibility */
+.menu-link:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+.icon-btn:focus,
+.sidebar-toggle:focus {
+    outline: 2px solid rgba(255, 255, 255, 0.5);
+    outline-offset: 2px;
+}
+
+/* Hamburger animation when sidebar is open */
+.sidebar-toggle.active .hamburger span:nth-child(1) {
+    transform: translateY(8px) rotate(45deg);
+}
+
+.sidebar-toggle.active .hamburger span:nth-child(2) {
+    opacity: 0;
+}
+
+.sidebar-toggle.active .hamburger span:nth-child(3) {
+    transform: translateY(-8px) rotate(-45deg);
+}

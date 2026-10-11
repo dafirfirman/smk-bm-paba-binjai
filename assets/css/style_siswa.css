@@ -1,0 +1,155 @@
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f5f5f5;
+    color: #333;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+h1, h2, h3 {
+    color: #2c3e50;
+}
+
+/* Welcome Message */
+.welcome-message {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.welcome-message h2 {
+    margin-top: 0;
+    color: #3498db;
+}
+
+/* Current Bill */
+.current-bill {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.bill-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 15px 0;
+    background: #f8f9fa;
+}
+
+.bill-card.paid {
+    background: #e8f5e9;
+}
+
+.bill-info h3 {
+    margin-top: 0;
+    color: #3498db;
+}
+
+.bill-amount {
+    text-align: right;
+}
+
+.bill-amount h3 {
+    margin: 5px 0;
+    font-size: 1.5rem;
+    color: #2c3e50;
+}
+
+.status {
+    padding: 5px 10px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+}
+
+.status.paid {
+    background-color: #2ecc71;
+    color: white;
+}
+
+.status.pending {
+    background-color: #f39c12;
+    color: white;
+}
+
+.status.unpaid {
+    background-color: #e74c3c;
+    color: white;
+}
+
+.payment-actions {
+    text-align: right;
+}
+
+.btn-pay {
+    display: inline-block;
+    padding: 10px 20px;
+    background: #3498db;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.btn-pay:hover {
+    background: #2980b9;
+    transform: translateY(-2px);
+}
+
+/* Payment History */
+.payment-history {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 20px 0;
+}
+
+table th, table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ecf0f1;
+}
+
+table th {
+    background-color: #3498db;
+    color: white;
+    font-weight: 500;
+}
+
+table tr:hover {
+    background-color: #f8f9fa;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .bill-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .bill-amount {
+        text-align: center;
+        margin-top: 15px;
+    }
+}

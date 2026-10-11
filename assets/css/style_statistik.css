@@ -1,0 +1,252 @@
+/* ==========================================================
+   Statistik & Aktivitas — Ungu–Biru–Putih (tanpa dark mode)
+   ========================================================== */
+:root{
+  --bg: #f7f8ff;
+  --surface: #ffffff;
+  --surface-2: #fafbff;
+
+  --primary: #6c63ff;      /* Ungu lembut */
+  --primary-600: #5a52ff;
+  --primary-700: #4b43e6;
+
+  --accent: #49a9ff;       /* Biru cerah */
+  --accent-600: #2f9bff;
+
+  --text: #1f2a44;
+  --muted: #6b7280;
+  --border: #e6e8f3;
+
+  --radius: 16px;
+  --shadow: 0 10px 30px rgba(108, 99, 255, .08);
+}
+
+*{ box-sizing: border-box; }
+html, body{ height: 100%; }
+
+body.dashboard-body{
+  margin: 0;
+  font-family: 'Poppins', system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, 'Helvetica Neue', Arial, sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, #f9faff 0%, #f4f6ff 100%);
+}
+
+/* Layout agar tidak ganggu sidebar */
+.main-content-wrapper{
+  margin-left: 250px; /* sesuaikan lebar sidebar */
+  padding: 28px 28px 40px;
+}
+@media (max-width: 1024px){
+  .main-content-wrapper{ margin-left: 0; padding: 20px; }
+}
+
+.content-container{
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Header */
+.dashboard-header{
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 22px;
+}
+.dashboard-title{
+  margin: 0;
+  font-weight: 700;
+  letter-spacing: .2px;
+  font-size: clamp(22px, 2vw + 12px, 34px);
+  color: var(--primary-700);
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+}
+.dashboard-date{
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  color: var(--muted);
+  font-weight: 500;
+}
+
+/* Ikon */
+.icon-sm{ width: 20px; height: 20px; object-fit: contain; }
+.icon-md{ width: 28px; height: 28px; object-fit: contain; }
+
+/* ===== Ringkasan ===== */
+.statistics-summary{
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+  margin-bottom: 22px;
+}
+@media (max-width: 1024px){
+  .statistics-summary{ grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 560px){
+  .statistics-summary{ grid-template-columns: 1fr; }
+}
+
+.stat-card{
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 16px;
+  transition: transform .16s ease, box-shadow .18s ease, border-color .18s ease;
+}
+.stat-card:hover{
+  transform: translateY(-3px);
+  border-color: rgba(108, 99, 255, .35);
+  box-shadow: 0 16px 28px rgba(108, 99, 255, .10);
+}
+.stat-icon{
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  width: 54px; height: 54px;
+  border-radius: 12px;
+  background: radial-gradient(120% 120% at 20% 20%, rgba(108,99,255,.16) 0%, rgba(73,169,255,.10) 55%, rgba(255,255,255,1) 100%);
+  border: 1px solid var(--border);
+}
+.stat-meta h3{
+  margin: 0 0 6px;
+  font-size: 14px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.stat-meta .stat-value{
+  margin: 0;
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+}
+
+/* ===== Grafik ===== */
+.statistics-charts{
+  margin-bottom: 22px;
+}
+.chart-card{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.chart-header{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 18px 18px 10px 18px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--surface-2) 0%, #ffffff 100%);
+}
+.chart-header h2{
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+.chart-legend-hint{
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 600;
+}
+.chart-container{
+  height: 360px;
+  padding: 14px 18px 20px;
+}
+
+/* ===== Aktivitas ===== */
+.recent-activities{
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow: hidden;
+}
+.activities-header{
+  padding: 16px 18px;
+  border-bottom: 1px solid var(--border);
+  background: linear-gradient(180deg, var(--surface-2) 0%, #ffffff 100%);
+}
+.activities-header h2{
+  margin: 0;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.table-responsive{ width: 100%; overflow-x: auto; }
+.nice-table{
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+.nice-table thead th{
+  background: #f5f6ff;
+  color: var(--text);
+  text-align: left;
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  font-weight: 700;
+}
+.nice-table tbody td{
+  padding: 12px 14px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.nice-table tbody tr:hover{
+  background: #fafbff;
+}
+.empty-row{
+  text-align: center;
+  color: var(--muted);
+  padding: 20px !important;
+}
+
+/* ===== Print: hanya konten utama ===== */
+@media print{
+  body{ background: #fff; }
+  .dashboard-sidebar,
+  .sidebar,
+  .sidebar-toggle,
+  nav,
+  header,
+  footer{ display: none !important; }
+  .main-content-wrapper{ margin: 0; padding: 0; }
+  .content-container{ max-width: 100%; }
+  *{ box-shadow: none !important; transition: none !important; }
+}
+
+/* ================= FOOTER STYLES ================= */
+.footer-container {
+    margin-left: 250px; /* Sesuaikan dengan lebar sidebar */
+    padding: 20px;
+    transition: margin 0.3s ease;
+}
+
+footer {
+    background-color: #f8f9fa;
+    padding: 15px 0;
+    text-align: center;
+    border-top: 1px solid #eee;
+}
+
+footer p {
+    margin: 0;
+    color: #7f8c8d;
+    font-size: 14px;
+}
